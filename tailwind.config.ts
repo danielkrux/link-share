@@ -7,11 +7,58 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      darkgray: "#333333",
+      gray: "#737373",
+      borders: "#D9D9D9",
+      lightgray: "#FAFAFA",
+      white: "#FFFFFF",
+      purple: "#633CFF",
+      lilac: "#BEADFF",
+      lightpurple: "#EFEBFF",
+      red: "#FF3939",
+    },
+    fontSize: {
+      "heading-m": [
+        "32px",
+        {
+          lineHeight: "150%",
+          fontWeight: "700",
+        },
+      ],
+      "heading-s": [
+        "16px",
+        {
+          lineHeight: "150%",
+          fontWeight: "700",
+        },
+      ],
+      base: [
+        "16px",
+        {
+          lineHeight: "150%",
+          fontWeight: "400",
+        },
+      ],
+      button: [
+        "16px",
+        {
+          lineHeight: "150%",
+          fontWeight: "600",
+        },
+      ],
+      "body-s": [
+        "12px",
+        {
+          lineHeight: "150%",
+          fontWeight: "400",
+        },
+      ],
+    },
+
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      boxShadow: {
+        "purple-blur": "0px 0px 32px rgba(99, 60, 255, 0.25)",
       },
     },
   },
