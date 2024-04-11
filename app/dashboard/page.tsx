@@ -16,11 +16,8 @@ export default async function DashboardHome() {
         Add/edit/remove links below and then share all your profiles with the
         world!
       </p>
-      <Button className="w-full" variant="secondary">
-        Add new link
-      </Button>
-      {!data?.length && <NoLinks />}
-      <LinkList />
+
+      <LinkList data={data as any[]} />
     </section>
   );
 }

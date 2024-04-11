@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 
 type InputProps = {
-  label: string;
+  label?: string;
   error?: string;
 } & React.ComponentProps<"input">;
 
@@ -14,7 +14,7 @@ export default function Input({ label, name, error, ...props }: InputProps) {
   );
   return (
     <label className="text-body-s text-darkgray block">
-      <span className="mb-1 block">{label}</span>
+      {label && <span className="mb-1 block">{label}</span>}
       <div className={cls}>
         <input
           className="p-2 rounded-lg outline-none w-full"
