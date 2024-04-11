@@ -19,8 +19,15 @@ const config: Config = {
       red: "#FF3939",
     },
     fontSize: {
-      "heading-m": [
+      "heading-l": [
         "32px",
+        {
+          lineHeight: "150%",
+          fontWeight: "700",
+        },
+      ],
+      "heading-m": [
+        "24px",
         {
           lineHeight: "150%",
           fontWeight: "700",

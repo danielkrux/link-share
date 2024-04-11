@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { createClient } from "../_utils/supabase";
+import { createClient } from "../_utils/supabase/createServerClient";
 import { redirect } from "next/navigation";
 
 const supabase = createClient();

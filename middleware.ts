@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
-import { createClient } from "./app/_utils/supabase";
+import { updateSession } from "./app/_utils/supabase/updateSession";
 
 export default async function middleware(request: NextRequest) {
-  const supabase = createClient();
+  const { supabase } = await updateSession(request);
   const user = await supabase.auth.getUser();
   const isAuthenticated = Boolean(user.data.user);
 
