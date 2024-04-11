@@ -33,7 +33,7 @@ export default function DashboardLayout({
           <span className="hidden mx-4 md:block">Preview</span>
         </Buttton>
       </header>
-      <main className="flex-1 p-4">{children}</main>
+      <main className="flex-1 m-4 md:m-0 md:mt-4">{children}</main>
     </div>
   );
 }
