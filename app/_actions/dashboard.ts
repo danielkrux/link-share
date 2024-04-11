@@ -1,14 +1,33 @@
 import { createClient } from "../_lib/supabase/createBrowserClient";
 
-export async function saveLinks(formData: FormData) {
+export async function saveLinks(_: any, formData: FormData) {
   const supabase = createClient();
-  const data = Object.fromEntries(formData.entries());
-  console.log(data);
-  // Save the data to the database
+  const userObj = await supabase.auth.getUser();
+  const userId = userObj.data.user?.id;
+
+  const ids = formData.getAll("id");
+  const names = formData.getAll("name");
+  const urls = formData.getAll("url");
+
+  const data = names.map((name, index) => ({
+    name,
+    user_id: userId,
+    id: ids[index] ? parseInt(ids[index] as string) : undefined,
+    url: urls[index],
+  }));
+
+  const result = await supabase
+    .from("links")
+    .upsert(data, {
+      defaultToNull: false,
+    })
+    .select("*");
+
+  return result.data;
 }
 
 export async function deleteLink(id: number) {
   const supabase = createClient();
-  // Delete the link from the database
+
   await supabase.from("links").delete().eq("id", id);
 }

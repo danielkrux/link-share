@@ -15,11 +15,13 @@ export default function Button({
       {...props}
       className={cn(
         props.className,
-        "bg-purple border border-purple rounded-lg p-3 text-white hover:bg-lilac hover:border-lilac hover:shadow-purple-blur  outline-none transition-colors",
+        "border rounded-lg p-3 outline-none transition-colors",
         {
+          "bg-purple border-purple text-white hover:border-lilac hover:bg-lilac hover:shadow-purple-blur":
+            variant === "primary",
           "bg-white text-purple *:text-purple hover:bg-lightpurple hover:shadow-none":
             variant === "secondary",
-          "border-opacity-0 bg-opacity-0 text-gray p-0 hover:bg-opacity-0 hover:shadow-none hover:border-opacity-0":
+          "border-transparant bg-transparant text-gray p-0 hover:bg-transparant hover:shadow-none hover:border-transparant hover:underline":
             variant === "ghost",
         }
       )}

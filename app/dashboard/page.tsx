@@ -1,8 +1,6 @@
 import React from "react";
 
-import Button from "../_components/Button";
 import { createClient } from "../_lib/supabase/createServerClient";
-import NoLinks from "./_components/NoLinks";
 import LinkList from "./_components/LinkList";
 
 export default async function DashboardHome() {

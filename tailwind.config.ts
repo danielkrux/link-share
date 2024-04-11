@@ -17,6 +17,7 @@ const config: Config = {
       lilac: "#BEADFF",
       lightpurple: "#EFEBFF",
       red: "#FF3939",
+      transparant: "rgba(0, 0, 0, 0)",
     },
     fontSize: {
       "heading-l": [
