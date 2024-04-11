@@ -1,4 +1,4 @@
-import { createClient } from "@/app/_utils/supabase/createServerClient";
+import { createClient } from "@/app/_lib/supabase/createServerClient";
 import React from "react";
 
 export default async function LinkList() {
