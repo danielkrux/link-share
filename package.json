@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "npx supabase gen types typescript --project-id 'ejicaosuwgsxvwnynwlf' --schema public > app/types/supabase.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.0.0",

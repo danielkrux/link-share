@@ -9,7 +9,7 @@ import Input from "@/app/components/Input";
 import { deleteLink, saveLinks } from "@/app/actions/dashboard";
 import NoLinks from "./NoLinks";
 import PlatformSelect from "./PlatformSelect";
-import LinkFormSubmit from "./LinkFormSubmit";
+import SubmitButton from "../../../components/SubmitButton";
 
 const isNumber = (id: string | number) => typeof id === "number";
 
@@ -71,7 +71,7 @@ export default function LinkForm({ data }: { data: any[] }) {
             <Input label="Link" name="url" defaultValue={link.url} />
           </div>
         ))}
-        <LinkFormSubmit />
+        <SubmitButton />
       </form>
     </>
   );

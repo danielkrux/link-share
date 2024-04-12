@@ -1,17 +1,17 @@
 import React from "react";
+import Image from "next/image";
+
+import ArrowRight from "@/public/icons/icon-arrow-right.svg";
+
 import { getUserServer } from "../actions/auth.actions";
 import { createClient } from "../lib/supabase/createServerClient";
-import ArrowRight from "@/public/icons/icon-arrow-right.svg";
-import Image from "next/image";
+import { getProfileData } from "../actions/profile.actions";
 
 export default async function PublicProfile() {
   const supabase = createClient();
   const user = await getUserServer();
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("user_id", user?.id)
-    .single();
+  const profile = await getProfileData();
+
   const { data: userLinks } = await supabase
     .from("links")
     .select("*")
@@ -25,7 +25,7 @@ export default async function PublicProfile() {
             alt="avatar"
             src={profile?.avatar_url}
             fill
-            objectFit="cover"
+            className="object-cover bg-gray"
           />
         </div>
         <h1 className="text-heading-m mb-2">

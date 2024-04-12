@@ -1,12 +1,14 @@
 import React from "react";
 import AvatarInput from "../components/AvatarInput";
 import Input from "@/app/components/Input";
-import Button from "@/app/components/Button";
 import { getProfileData, saveProfileData } from "@/app/actions/profile.actions";
 import LogoutButton from "./LogoutButton";
+import SubmitButton from "@/app/components/SubmitButton";
 
 export default async function Profile() {
   const profile = await getProfileData();
+
+  console.log(profile);
 
   return (
     <div className="bg-white flex-grow rounded-lg p-6 lg:p-10">
@@ -17,24 +19,22 @@ export default async function Profile() {
       <form action={saveProfileData}>
         <section className="bg-lightgray p-5 rounded-lg">
           <span className="text-gray block mb-4">Profile picture</span>
-          <AvatarInput defaultValue={profile?.avatar_url} />
+          <AvatarInput defaultValue={profile?.avatar_url ?? ""} />
         </section>
         <section className="bg-lightgray p-5 rounded-lg mt-6 flex flex-col gap-3">
           <Input
-            defaultValue={profile?.first_name}
+            defaultValue={profile?.first_name ?? ""}
             name="first_name"
             label="First name"
           />
           <Input
-            defaultValue={profile?.last_name}
+            defaultValue={profile?.last_name ?? ""}
             name="last_name"
             label="Last name"
           />
           <Input defaultValue={profile?.email} name="email" label="Email" />
         </section>
-        <Button className="w-full mt-6" type="submit">
-          Save
-        </Button>
+        <SubmitButton />
       </form>
       <LogoutButton className="mt-14" />
     </div>
