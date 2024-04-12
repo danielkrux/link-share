@@ -1,15 +1,20 @@
 import Image from "next/image";
 import React from "react";
 
-import Nav from "../../components/Nav";
-import Buttton from "../../components/Button";
+import Nav from "@/app/components/Nav";
+import Buttton from "@/app/components/Button";
 import PreviewIcon from "@/public/icons/icon-preview-header.svg";
+import { createClient } from "@/app/lib/supabase/createServerClient";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = createClient();
+  const userObj = await supabase.auth.getUser();
+  const userId = userObj?.data.user?.id;
+
   return (
     <div className="min-h-screen flex flex-col bg-lightgray md:p-8">
       <header className="relative bg-white py-4 px-6 flex justify-between items-center rounded-b-lg md:rounded-lg">
@@ -28,7 +33,7 @@ export default function DashboardLayout({
           height="32"
         />
         <Nav />
-        <Buttton variant="secondary">
+        <Buttton href={`/${userId}`} variant="secondary">
           <PreviewIcon className="size-[20px] md:hidden" />
           <span className="hidden mx-4 md:block">Preview</span>
         </Buttton>
