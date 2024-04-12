@@ -1,5 +1,5 @@
 import React from "react";
-import Empty from "../../../public/empty.svg";
+import Empty from "@/public/empty.svg";
 
 export default function NoLinks() {
   return (

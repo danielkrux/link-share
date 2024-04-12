@@ -1,6 +1,6 @@
 "use client";
 
-import { logout } from "@/app/(auth)/actions";
+import { logout } from "@/app/(routes)/(auth)/actions";
 import Button from "@/app/components/Button";
 import React from "react";
 

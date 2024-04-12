@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-import Nav from "../components/Nav";
-import Buttton from "../components/Button";
+import Nav from "../../components/Nav";
+import Buttton from "../../components/Button";
 import PreviewIcon from "@/public/icons/icon-preview-header.svg";
 
 export default function DashboardLayout({
