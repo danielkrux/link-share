@@ -1,13 +1,12 @@
 import React from "react";
 import AvatarInput from "../components/AvatarInput";
-import { getUserServer } from "@/app/actions/auth.actions";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
-import { saveProfileData } from "@/app/actions/profile.actions";
+import { getProfileData, saveProfileData } from "@/app/actions/profile.actions";
 import LogoutButton from "./LogoutButton";
 
 export default async function Profile() {
-  const user = await getUserServer();
+  const profile = await getProfileData();
 
   return (
     <div className="bg-white rounded-lg p-6">
@@ -18,12 +17,20 @@ export default async function Profile() {
       <form action={saveProfileData}>
         <section className="bg-lightgray p-5 rounded-lg">
           <span className="text-gray block mb-4">Profile picture</span>
-          <AvatarInput />
+          <AvatarInput defaultValue={profile?.avatar_url} />
         </section>
         <section className="bg-lightgray p-5 rounded-lg mt-6 flex flex-col gap-3">
-          <Input name="first_name" label="First name" />
-          <Input name="last_name" label="Last name" />
-          <Input name="email" label="Email" />
+          <Input
+            defaultValue={profile?.first_name}
+            name="first_name"
+            label="First name"
+          />
+          <Input
+            defaultValue={profile?.last_name}
+            name="last_name"
+            label="Last name"
+          />
+          <Input defaultValue={profile?.email} name="email" label="Email" />
         </section>
         <Button className="w-full mt-6" type="submit">
           Save

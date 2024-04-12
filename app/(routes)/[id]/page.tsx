@@ -16,7 +16,7 @@ export default async function UserLinks({
 
   return (
     <main className="flex flex-col min-h-screen m-6">
-      {userData && (
+      {userData && userData?.user?.id === params.id && (
         <div className="flex justify-between">
           <Button href="/dashboard" variant="secondary">
             Back to Editor

@@ -3,6 +3,20 @@
 import { createClient } from "../lib/supabase/createServerClient";
 import { getUserServer } from "./auth.actions";
 
+export async function getProfileData(id?: string) {
+  const supabase = createClient();
+  const currentUser = await getUserServer();
+
+  const userId = id ?? currentUser?.id;
+  const { data } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+
+  return { ...data, user_id: userId, email: currentUser?.email };
+}
+
 export async function saveProfileData(formData: FormData) {
   const supabase = createClient();
   const user = await getUserServer();

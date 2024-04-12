@@ -5,16 +5,14 @@ import Image from "next/image";
 import PlaceholderImage from "@/public/icons/icon-upload-image.svg";
 import { useFormStatus } from "react-dom";
 
-export default function Avatar() {
+export default function Avatar({ defaultValue }: { defaultValue: string }) {
   const { pending } = useFormStatus();
-  const [preview, setPreview] = React.useState<string>();
+  const [preview, setPreview] = React.useState<string>(defaultValue);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event?.target.files) return;
     setPreview(URL.createObjectURL(event.target.files[0]));
   };
-
-  console.log(preview);
 
   return (
     <div>
@@ -34,7 +32,7 @@ export default function Avatar() {
             <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white self-center z-10 flex flex-col items-center">
               <PlaceholderImage className="size-10" />
               <span className="text-heading-s [font-weight:600]">
-                {pending ? "Uploading ..." : "Upload"}
+                {pending ? "Uploading ..." : "Change Image"}
               </span>
             </div>
           </div>

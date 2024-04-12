@@ -21,7 +21,12 @@ export default async function PublicProfile() {
     <div>
       <section className="mb-14 flex flex-col items-center">
         <div className="relative aspect-square w-24 rounded-full overflow-hidden mb-6">
-          <Image alt="avatar" src={profile.avatar_url} fill />
+          <Image
+            alt="avatar"
+            src={profile?.avatar_url}
+            fill
+            objectFit="cover"
+          />
         </div>
         <h1 className="text-heading-m mb-2">
           {profile?.first_name} {profile?.last_name}
