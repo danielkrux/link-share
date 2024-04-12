@@ -1,27 +1,23 @@
 import { NextResponse, NextRequest } from "next/server";
-import { updateSession } from "./app/lib/supabase/updateSession";
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 
-export default async function middleware(request: NextRequest) {
-  const { supabase } = await updateSession(request);
+export default async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
+  const supabase = createMiddlewareClient({ req, res });
   const user = await supabase.auth.getUser();
   const isAuthenticated = Boolean(user.data.user);
 
-  const headers = new Headers(request.headers);
-  headers.set("x-url", request.url);
-
-  // If the user is authenticated, continue as normal
   if (isAuthenticated) {
-    return NextResponse.next({
-      request: {
-        headers,
-      },
-    });
+    return NextResponse.next();
   }
 
-  // Redirect to login page if not authenticated
-  return NextResponse.redirect(new URL("/login", request.url));
+  if (!isAuthenticated && req.nextUrl.pathname !== "/") {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  return res;
 }
 
 export const config = {
-  matcher: ["/dashboard"],
+  matcher: ["/", "/dashboard"],
 };
