@@ -31,8 +31,6 @@ export async function saveProfileData(formData: FormData) {
   const email = formData.get("email") as string;
   const avatar = formData.get("avatar") as File;
 
-  console.log({ firstName, lastName, email, avatar });
-
   try {
     let avatarUrl = profile?.avatar_url;
     if (avatar) {
@@ -43,13 +41,20 @@ export async function saveProfileData(formData: FormData) {
       avatarUrl = data.publicUrl;
     }
 
-    const { error } = await supabase.from("profiles").upsert({
-      id: profile?.id,
-      first_name: firstName,
-      last_name: lastName,
-      avatar_url: avatarUrl,
-      user_id: user?.id,
-    });
+    if (email !== user?.email) {
+      await supabase.auth.updateUser({ email });
+    }
+
+    const { error } = await supabase.from("profiles").upsert(
+      {
+        id: profile?.id,
+        first_name: firstName,
+        last_name: lastName,
+        avatar_url: avatarUrl,
+        user_id: user?.id,
+      },
+      { onConflict: "user_id" }
+    );
 
     console.log(error);
   } catch (error) {

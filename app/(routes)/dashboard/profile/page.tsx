@@ -9,9 +9,9 @@ export default async function Profile() {
   const profile = await getProfileData();
 
   return (
-    <div className="bg-white rounded-lg p-6">
-      <h1 className="text-heading-m mb-2">Profile Details</h1>
-      <p className="mb-10">
+    <div className="bg-white flex-grow rounded-lg p-6 lg:p-10">
+      <h1 className="text-heading-m lg:text-heading-l mb-2">Profile Details</h1>
+      <p className="mb-10 text-gray">
         Add your details to create a personal touch to your profile
       </p>
       <form action={saveProfileData}>

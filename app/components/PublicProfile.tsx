@@ -18,7 +18,7 @@ export default async function PublicProfile() {
     .eq("user_id", user?.id);
 
   return (
-    <div>
+    <div className="z-10">
       <section className="mb-14 flex flex-col items-center">
         <div className="relative aspect-square w-24 rounded-full overflow-hidden mb-6">
           <Image

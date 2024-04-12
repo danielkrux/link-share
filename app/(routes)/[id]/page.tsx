@@ -1,6 +1,8 @@
-import Button from "@/app/components/Button";
-import { createClient } from "@/app/lib/supabase/createServerClient";
 import React from "react";
+
+import Button from "@/app/components/Button";
+import PublicProfile from "@/app/components/PublicProfile";
+import { createClient } from "@/app/lib/supabase/createServerClient";
 
 export default async function UserLinks({
   params,
@@ -9,10 +11,6 @@ export default async function UserLinks({
 }) {
   const supabase = createClient();
   const { data: userData } = await supabase.auth.getUser();
-  const { data } = await supabase
-    .from("links")
-    .select("*")
-    .eq("user_id", params.id);
 
   return (
     <main className="flex flex-col min-h-screen m-6">
@@ -24,18 +22,7 @@ export default async function UserLinks({
           <Button>Share link</Button>
         </div>
       )}
-      <section className="mt-14">
-        <a href={`mailto:${userData.user?.email}`}>{userData.user?.email}</a>
-        <ul>
-          {data?.map((link: any) => (
-            <li key={link.id}>
-              <a href={link.url} target="_blank">
-                {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <PublicProfile />
     </main>
   );
 }
