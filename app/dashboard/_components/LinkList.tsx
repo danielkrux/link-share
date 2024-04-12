@@ -4,11 +4,11 @@ import React, { useEffect } from "react";
 import { nanoid } from "nanoid";
 import { useFormState } from "react-dom";
 
-import Button from "@/app/_components/Button";
-import { deleteLink, saveLinks } from "@/app/_actions/dashboard";
+import Button from "@/app/components/Button";
+import Input from "@/app/components/Input";
+import { deleteLink, saveLinks } from "@/app/actions/dashboard";
 import NoLinks from "./NoLinks";
 import PlatformSelect from "./PlatformSelect";
-import Input from "@/app/_components/Input";
 
 const isNumber = (id: string | number) => typeof id === "number";
 

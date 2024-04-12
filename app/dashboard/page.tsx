@@ -1,6 +1,6 @@
 import React from "react";
 
-import { createClient } from "../_lib/supabase/createServerClient";
+import { createClient } from "../lib/supabase/createServerClient";
 import LinkList from "./_components/LinkList";
 
 export default async function DashboardHome() {

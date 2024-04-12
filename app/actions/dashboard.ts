@@ -1,4 +1,4 @@
-import { createClient } from "../_lib/supabase/createBrowserClient";
+import { createClient } from "../lib/supabase/createBrowserClient";
 
 export async function saveLinks(_: any, formData: FormData) {
   const supabase = createClient();

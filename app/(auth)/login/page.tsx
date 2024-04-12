@@ -3,8 +3,8 @@
 import Link from "next/link";
 import React from "react";
 
-import Button from "@/app/_components/Button";
-import Input from "@/app/_components/Input";
+import Button from "@/app/components/Button";
+import Input from "@/app/components/Input";
 import { useFormState, useFormStatus } from "react-dom";
 import { login } from "../actions";
 

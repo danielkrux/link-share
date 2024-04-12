@@ -1,5 +1,6 @@
 import React from "react";
 import * as Select from "@radix-ui/react-select";
+import ChevronDownIcon from "@/public/icons/icon-chevron-down.svg";
 
 type SelectProps = {
   label: string;
@@ -14,8 +15,11 @@ export default ({ label, defaultValue, name, options }: SelectProps) => {
     <label className=" text-darkgray block">
       <span className="block mb-1 text-body-s">{label}</span>
       <Select.Root defaultValue={defaultValue} name={name}>
-        <Select.Trigger className="bg-white rounded-lg w-full border border-borders p-2 text-left hover:border-purple hover:shadow-purple-blur  transition-all outline-none">
+        <Select.Trigger className="bg-white rounded-lg w-full border border-borders p-2 text-left hover:border-purple hover:shadow-purple-blur  transition-all outline-none inline-flex justify-between items-center pr-4">
           <Select.Value placeholder="Select a platform..." />
+          <Select.Icon>
+            <ChevronDownIcon className="w-4" />
+          </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
           <Select.Content

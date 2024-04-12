@@ -1,7 +1,7 @@
 "use client";
 
 import { logout } from "@/app/(auth)/actions";
-import Button from "@/app/_components/Button";
+import Button from "@/app/components/Button";
 import React from "react";
 
 export default function Profile() {

@@ -1,4 +1,4 @@
-import Select from "@/app/_components/Select";
+import Select from "@/app/components/Select";
 import React from "react";
 
 const platforms = [
