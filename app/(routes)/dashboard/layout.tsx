@@ -10,10 +10,10 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className=" flex flex-col min-h-screen bg-lightgray md:p-8">
+    <div className=" flex flex-col h-screen bg-lightgray md:p-8">
       <Navigation />
-      <div className="flex flex-grow gap-6 mt-4 md:mt-6">
-        <aside className="hidden lg:flex flex-col flex-grow flex-1 items-center justify-center p-6 bg-white rounded-lg">
+      <div className="flex flex-grow max-h-screen overflow-scroll gap-6 mt-4 md:mt-6">
+        <aside className="hidden relative lg:flex flex-col flex-grow flex-1 items-center justify-center p-6 bg-white rounded-lg">
           <PhoneFrame className="absolute max-w-[300px]" />
           <PublicProfile />
         </aside>

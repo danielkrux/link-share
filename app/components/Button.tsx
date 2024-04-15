@@ -15,7 +15,7 @@ export default function Button({
 }: ButtonProps) {
   const cls = cn(
     props.className,
-    "border rounded-lg p-3 outline-none transition-colors",
+    "border rounded-lg py-2 px-5 outline-none transition-colors text-heading-s",
     {
       "bg-purple border-purple text-white hover:border-lilac hover:bg-lilac hover:shadow-purple-blur":
         variant === "primary",

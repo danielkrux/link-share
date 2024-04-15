@@ -1,22 +1,28 @@
 import React from "react";
-import AvatarInput from "../components/AvatarInput";
 import Input from "@/app/components/Input";
 import { getProfileData, saveProfileData } from "@/app/actions/profile.actions";
-import LogoutButton from "./LogoutButton";
 import SubmitButton from "@/app/components/SubmitButton";
+
+import AvatarInput from "../components/AvatarInput";
+import LogoutButton from "./LogoutButton";
 
 export default async function Profile() {
   const profile = await getProfileData();
 
-  console.log(profile);
-
   return (
-    <div className="bg-white flex-grow rounded-lg p-6 lg:p-10">
-      <h1 className="text-heading-m lg:text-heading-l mb-2">Profile Details</h1>
-      <p className="mb-10 text-gray">
-        Add your details to create a personal touch to your profile
-      </p>
-      <form action={saveProfileData}>
+    <div className="relative bg-white flex-grow rounded-lg ">
+      <div className="flex justify-between p-6 lg:p-10">
+        <div>
+          <h1 className="text-heading-m lg:text-heading-l mb-2">
+            Profile Details
+          </h1>
+          <p className="text-gray">
+            Add your details to create a personal touch to your profile
+          </p>
+        </div>
+        <LogoutButton className="hidden lg:block" />
+      </div>
+      <form action={saveProfileData} className="mx-6 lg:mx-10">
         <section className="bg-lightgray p-5 rounded-lg">
           <span className="text-gray block mb-4">Profile picture</span>
           <AvatarInput defaultValue={profile?.avatar_url ?? ""} />
@@ -34,9 +40,11 @@ export default async function Profile() {
           />
           <Input defaultValue={profile?.email} name="email" label="Email" />
         </section>
-        <SubmitButton />
+        <LogoutButton className="block lg:hidden mt-6" />
+        <div className="flex absolute bottom-0 left-0 right-0 lg:justify-end bg-white p-6 border-t border-borders">
+          <SubmitButton className="w-full lg:w-auto" />
+        </div>
       </form>
-      <LogoutButton className="mt-14" />
     </div>
   );
 }

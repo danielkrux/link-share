@@ -3,7 +3,7 @@ import Empty from "@/public/empty.svg";
 
 export default function NoLinks() {
   return (
-    <div className="text-gray rounded-lg mt-6 px-4 py-8 text-center bg-lightgray ">
+    <div className="text-gray rounded-lg mx-6 lg:mx-10 my-6 px-4 py-8 text-center bg-lightgray ">
       <Empty className="max-w-[125px] mx-auto mb-8" />
       <h1 className="text-heading-m text-darkgray mb-6">
         Let&apos;s get you started
