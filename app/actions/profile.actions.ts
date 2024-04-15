@@ -1,9 +1,11 @@
 "use server";
 
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+
 import { Database } from "../types/supabase";
 import { getUserServer } from "./auth.actions";
-import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export async function getProfileData(id?: string) {
   const supabase = createServerActionClient<Database>({ cookies });
@@ -19,7 +21,7 @@ export async function getProfileData(id?: string) {
     .eq("user_id", userId)
     .single();
 
-  return { ...data, user_id: userId, email: currentUser?.email };
+  return { ...data, user_id: userId };
 }
 
 export async function saveProfileData(formData: FormData) {
@@ -35,7 +37,9 @@ export async function saveProfileData(formData: FormData) {
       .eq("user_id", user?.id)
       .single();
 
-    if (error) throw new Error("Error fetching profile");
+    if (error) {
+      console.log("No profile found...");
+    }
 
     const firstName = formData.get("first_name") as string;
     const lastName = formData.get("last_name") as string;
@@ -60,11 +64,17 @@ export async function saveProfileData(formData: FormData) {
       id: profile?.id,
       first_name: firstName,
       last_name: lastName,
+      email,
       avatar_url: avatarUrl,
       user_id: user?.id,
     });
 
-    if (saveError) throw new Error("Error saving profile");
+    if (saveError) {
+      console.error(saveError);
+      throw new Error("Error saving profile");
+    }
+
+    revalidatePath("/profile", "layout");
   } catch (error) {
     console.error(error);
   }

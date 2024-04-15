@@ -32,17 +32,15 @@ export default function LoginPage() {
           label="Email address"
           type="email"
           autoComplete="email"
-          value="danielmartijn@gmail.com"
-          readOnly
+          defaultValue="danielmartijn@gmail.com"
           error={state?.error?.email?.[0]}
         />
         <Input
           name="password"
           label="Password"
           type="password"
-          value="test-123"
+          defaultValue="test-123"
           autoComplete="current-password"
-          readOnly
           error={state?.error?.password?.[0]}
         />
         <Button disabled={pending} type="submit">

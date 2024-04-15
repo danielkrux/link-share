@@ -77,6 +77,7 @@ export async function login(prevState: any, formData: FormData) {
   });
 
   if (error) {
+    console.error(error);
     return {
       error: {
         email: ["Invalid email or password"],
