@@ -1,21 +1,18 @@
 import React from "react";
 import Image from "next/image";
+import { cookies } from "next/headers";
 
 import ArrowRight from "@/public/icons/icon-arrow-right.svg";
 
 import { createClient } from "../lib/supabase/createServerClient";
 import { getProfileData } from "../actions/profile.actions";
-import { cookies } from "next/headers";
 
 export default async function PublicProfile({ id }: { id?: string }) {
   const supabase = createClient();
   const currentLinksStr = cookies().get("links")?.value;
   const authenticatedUserLinks = JSON.parse(currentLinksStr ?? "[]");
 
-  const profile = await getProfileData();
-  const session = await supabase.auth.getSession();
-
-  const user = session.data.session?.user;
+  const profile = await getProfileData(id);
 
   const { data: userLinks } = await supabase
     .from("links")
@@ -38,7 +35,7 @@ export default async function PublicProfile({ id }: { id?: string }) {
         <h1 className="text-heading-m mb-2">
           {profile?.first_name} {profile?.last_name}
         </h1>
-        <a href={`mailto:${user?.email}`}>{user?.email}</a>
+        <a href={`mailto:${profile?.email}`}>{profile?.email}</a>
       </section>
       <section>
         <ul>

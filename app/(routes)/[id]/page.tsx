@@ -10,11 +10,13 @@ export default async function UserLinks({
   params: { id: string };
 }) {
   const supabase = createClient();
-  const { data: userData } = await supabase.auth.getUser();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   return (
     <main className="flex flex-col min-h-screen m-6">
-      {userData && userData?.user?.id === params.id && (
+      {session && session?.user?.id === params.id && (
         <div className="flex justify-between">
           <Button href="/dashboard" variant="secondary">
             Back to Editor
