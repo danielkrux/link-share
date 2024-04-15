@@ -1,60 +1,31 @@
-"use client";
+import React from "react";
+import { cookies } from "next/headers";
 
-import React, { useEffect } from "react";
-import { nanoid } from "nanoid";
-import { useFormState } from "react-dom";
-
-import Button from "@/app/components/Button";
 import Input from "@/app/components/Input";
-import { deleteLink, saveLinks } from "@/app/actions/dashboard";
+import SubmitButton from "@/app/components/SubmitButton";
+import { saveLinks } from "@/app/actions/dashboard";
+import { Tables } from "@/app/types/supabase";
+
 import NoLinks from "./NoLinks";
 import PlatformSelect from "./PlatformSelect";
-import SubmitButton from "../../../components/SubmitButton";
+import AddLinkButton from "./AddLinkButton";
+import DeleteLinkButton from "./DeleteLinkButton";
 
 const isNumber = (id: string | number) => typeof id === "number";
 
-export default function LinkForm({ data }: { data: any[] }) {
-  const [state, formAction] = useFormState(saveLinks, data);
-  const [links, setLinks] = React.useState(data);
-
-  useEffect(() => {
-    setLinks(state as any[]);
-  }, [state]);
-
-  function addLink() {
-    setLinks((prev) => [
-      ...prev,
-      {
-        id: nanoid(),
-        name: "",
-        url: "",
-      },
-    ]);
-  }
-
-  async function removeLink(id: string | number) {
-    setLinks((prev) => prev.filter((link) => link.id !== id));
-    if (typeof id === "number") {
-      await deleteLink(id);
-    }
-  }
+export default function LinkForm() {
+  const linksRaw = cookies().get("links")?.value;
+  const links: Tables<"links">[] = JSON.parse(linksRaw ?? "[]");
 
   return (
     <>
       {!links?.length && <NoLinks />}
       <form
         className="flex flex-col flex-grow overflow-scroll"
-        action={formAction}
+        action={saveLinks}
       >
         <ul className="mx-6 lg:mx-10 pb-[100px] lg:mb-1">
-          <Button
-            onClick={addLink}
-            className="w-full"
-            type="button"
-            variant="secondary"
-          >
-            Add new link
-          </Button>
+          <AddLinkButton />
           {links?.map((link, index) => (
             <li
               key={link.id}
@@ -62,22 +33,15 @@ export default function LinkForm({ data }: { data: any[] }) {
             >
               <div className="flex row items-center justify-between">
                 <h2 className="text-heading-s">Link #{index + 1}</h2>
-                <Button
-                  onClick={() => removeLink(link.id)}
-                  className="mt-2"
-                  variant="ghost"
-                  type="button"
-                >
-                  Delete
-                </Button>
+                <DeleteLinkButton link={link} />
               </div>
-              <PlatformSelect defaultValue={link.name} />
+              <PlatformSelect defaultValue={link.name ?? ""} />
               <input
                 type="hidden"
                 name="id"
                 value={isNumber(link.id) ? link.id : ""}
               />
-              <Input label="Link" name="url" defaultValue={link.url} />
+              <Input label="Link" name="url" defaultValue={link.url ?? ""} />
             </li>
           ))}
         </ul>

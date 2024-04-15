@@ -1,3 +1,5 @@
+"use client";
+
 import Select from "@/app/components/Select";
 import React from "react";
 

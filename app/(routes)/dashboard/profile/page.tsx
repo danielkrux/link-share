@@ -40,11 +40,11 @@ export default async function Profile() {
           />
           <Input defaultValue={profile?.email} name="email" label="Email" />
         </section>
-        <LogoutButton className="block lg:hidden mt-6" />
         <div className="flex absolute bottom-0 left-0 right-0 lg:justify-end bg-white p-6 border-t border-borders">
           <SubmitButton className="w-full lg:w-auto" />
         </div>
       </form>
+      <LogoutButton className="block lg:hidden mt-6 mx-6 lg:mx-10" />
     </div>
   );
 }

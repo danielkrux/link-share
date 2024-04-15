@@ -3,19 +3,26 @@ import Image from "next/image";
 
 import ArrowRight from "@/public/icons/icon-arrow-right.svg";
 
-import { getUserServer } from "../actions/auth.actions";
 import { createClient } from "../lib/supabase/createServerClient";
 import { getProfileData } from "../actions/profile.actions";
+import { cookies } from "next/headers";
 
-export default async function PublicProfile() {
+export default async function PublicProfile({ id }: { id?: string }) {
   const supabase = createClient();
-  const user = await getUserServer();
+  const currentLinksStr = cookies().get("links")?.value;
+  const authenticatedUserLinks = JSON.parse(currentLinksStr ?? "[]");
+
   const profile = await getProfileData();
+  const session = await supabase.auth.getSession();
+
+  const user = session.data.session?.user;
 
   const { data: userLinks } = await supabase
     .from("links")
     .select("*")
-    .eq("user_id", user?.id);
+    .eq("user_id", id);
+
+  const links = id ? userLinks : authenticatedUserLinks;
 
   return (
     <div className="z-10">
@@ -23,7 +30,7 @@ export default async function PublicProfile() {
         <div className="relative aspect-square w-24 rounded-full overflow-hidden mb-6">
           <Image
             alt="avatar"
-            src={profile?.avatar_url}
+            src={profile?.avatar_url ?? ""}
             fill
             className="object-cover bg-gray"
           />
@@ -35,7 +42,7 @@ export default async function PublicProfile() {
       </section>
       <section>
         <ul>
-          {userLinks?.map((link: any) => (
+          {links?.map((link: any) => (
             <a key={link.id} href={link.url} target="_blank">
               <li className="p-3 bg-lightgray rounded-lg flex justify-between max-w-60">
                 <span>{link.name}</span>

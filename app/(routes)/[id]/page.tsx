@@ -22,7 +22,7 @@ export default async function UserLinks({
           <Button>Share link</Button>
         </div>
       )}
-      <PublicProfile />
+      <PublicProfile id={params.id} />
     </main>
   );
 }
