@@ -4,7 +4,7 @@ import Image from "next/image";
 import ArrowRight from "@/public/icons/icon-arrow-right.svg";
 
 import { getProfileData } from "../actions/profile.actions";
-import { cn } from "../utils/utils";
+import { cn } from "../lib/utils";
 import { getLinks } from "../actions/dashboard.actions";
 
 export default async function PublicProfile({

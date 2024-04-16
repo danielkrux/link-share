@@ -1,7 +1,7 @@
 import React from "react";
-import Input from "@/app/components/Input";
-import { getProfileData, saveProfileData } from "@/app/actions/profile.actions";
-import SubmitButton from "@/app/components/SubmitButton";
+import Input from "@/components/ui/Input";
+import { getProfileData, saveProfileData } from "@/actions/profile.actions";
+import SubmitButton from "@/components/SubmitButton";
 
 import AvatarInput from "../components/AvatarInput";
 import LogoutButton from "./LogoutButton";

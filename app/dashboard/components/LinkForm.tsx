@@ -1,11 +1,11 @@
 import React from "react";
 import { cookies } from "next/headers";
 
-import Input from "@/app/components/Input";
-import SubmitButton from "@/app/components/SubmitButton";
-import { getLinks, saveLinks } from "@/app/actions/dashboard.actions";
-import { Tables } from "@/app/types/supabase";
-import { createClient } from "@/app/lib/supabase/createServerClient";
+import Input from "@/components/ui/Input";
+import SubmitButton from "@/components/SubmitButton";
+import { getLinks, saveLinks } from "@/actions/dashboard.actions";
+import { Tables } from "@/types/supabase";
+import { createClient } from "@/lib/supabase/createServerClient";
 
 import NoLinks from "./NoLinks";
 import PlatformSelect from "./PlatformSelect";

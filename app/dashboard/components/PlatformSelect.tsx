@@ -1,6 +1,6 @@
 "use client";
 
-import Select from "@/app/components/Select";
+import Select from "@/components/ui/Select";
 import React from "react";
 
 const platforms = [

@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-import { getUserServer } from "@/app/actions/auth.actions";
-import Button from "@/app/components/Button";
-import Nav from "@/app/components/Nav";
+import { getUserServer } from "@/actions/auth.actions";
+import Button from "@/components/ui/Button";
+import Nav from "@/components/Nav";
 import PreviewIcon from "@/public/icons/icon-preview-header.svg";
 
 export default async function Navigation() {

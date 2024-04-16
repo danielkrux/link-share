@@ -1,8 +1,8 @@
 "use client";
 
-import { deleteLink } from "@/app/actions/dashboard.actions";
-import Button from "@/app/components/Button";
-import { Tables } from "@/app/types/supabase";
+import { deleteLink } from "@/actions/dashboard.actions";
+import Button from "@/components/ui/Button";
+import { Tables } from "@/types/supabase";
 import React from "react";
 
 export default function DeleteLinkButton({ link }: { link: Tables<"links"> }) {

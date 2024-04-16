@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import { createNewLink } from "@/app/actions/dashboard.actions";
-import Button from "@/app/components/Button";
+import { createNewLink } from "@/actions/dashboard.actions";
+import Button from "@/components/ui/Button";
 
 export default function AddLinkButton() {
   return (

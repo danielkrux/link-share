@@ -1,8 +1,9 @@
 import React from "react";
 
-import Button from "@/app/components/Button";
-import PublicProfile from "@/app/components/PublicProfile";
-import { createClient } from "@/app/lib/supabase/createServerClient";
+import Button from "@/components/ui/Button";
+import PublicProfile from "@/components/PublicProfile";
+import { createClient } from "@/lib/supabase/createServerClient";
+import CopyToClipboardButton from "@/components/CopyToClipboardButton";
 
 export default async function UserLinks({
   params,
@@ -21,7 +22,7 @@ export default async function UserLinks({
           <Button href="/dashboard" variant="secondary">
             Back to Editor
           </Button>
-          <Button>Share link</Button>
+          <CopyToClipboardButton>Share link</CopyToClipboardButton>
         </header>
       )}
       <PublicProfile

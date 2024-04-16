@@ -1,7 +1,7 @@
 import React from "react";
 
 import Navigation from "./components/Navigation";
-import PublicProfile from "@/app/components/PublicProfile";
+import PublicProfile from "@/components/PublicProfile";
 import PhoneFrame from "@/public/phone.svg";
 
 export default async function DashboardLayout({

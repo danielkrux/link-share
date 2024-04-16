@@ -3,8 +3,8 @@
 import React from "react";
 import { useFormStatus } from "react-dom";
 
-import Button from "@/app/components/Button";
-import { cn } from "../utils/utils";
+import Button from "@/components/ui/Button";
+import { cn } from "../lib/utils";
 
 export default function SubmitButton({ className }: { className?: string }) {
   const { pending } = useFormStatus();
