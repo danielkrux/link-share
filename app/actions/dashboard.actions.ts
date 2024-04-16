@@ -4,6 +4,18 @@ import { cookies } from "next/headers";
 import { nanoid } from "nanoid";
 import { createClient } from "../lib/supabase/createServerClient";
 
+export async function getLinks(userId: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("links")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error) console.log("Error getting links", error);
+
+  return data;
+}
+
 export async function createNewLink() {
   const supabase = createClient();
   const userObj = await supabase.auth.getSession();
@@ -32,9 +44,14 @@ export async function saveLinks(formData: FormData) {
   const userObj = await supabase.auth.getSession();
   const userId = userObj.data.session?.user.id;
 
-  const ids = formData.getAll("id");
-  const names = formData.getAll("name");
-  const urls = formData.getAll("url");
+  if (!userId) {
+    console.log("User not found");
+    return;
+  }
+
+  const ids = formData.getAll("id") as (string | number)[];
+  const names = formData.getAll("name") as string[];
+  const urls = formData.getAll("url") as string[];
 
   const data = names.map((name, index) => ({
     name,
@@ -58,6 +75,11 @@ export async function deleteLink(id: number | string) {
   const supabase = createClient();
   const userObj = await supabase.auth.getSession();
   const userId = userObj.data.session?.user.id;
+
+  if (!userId) {
+    console.log("User not found");
+    return;
+  }
 
   if (typeof id === "string") {
     const existingLinksStr = cookies().get("links")?.value;

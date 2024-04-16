@@ -1,12 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { cookies } from "next/headers";
 
 import ArrowRight from "@/public/icons/icon-arrow-right.svg";
 
-import { createClient } from "../lib/supabase/createServerClient";
 import { getProfileData } from "../actions/profile.actions";
 import { cn } from "../utils/utils";
+import { getLinks } from "../actions/dashboard.actions";
 
 export default async function PublicProfile({
   className,
@@ -15,18 +14,8 @@ export default async function PublicProfile({
   className?: string;
   id?: string;
 }) {
-  const supabase = createClient();
-  const currentLinksStr = cookies().get("links")?.value;
-  const authenticatedUserLinks = JSON.parse(currentLinksStr ?? "[]");
-
   const profile = await getProfileData(id);
-
-  const { data: userLinks } = await supabase
-    .from("links")
-    .select("*")
-    .eq("user_id", id);
-
-  const links = id ? userLinks : authenticatedUserLinks;
+  const userLinks = await getLinks(profile.user_id);
 
   return (
     <div className={cn(className, "z-10")}>
@@ -48,7 +37,7 @@ export default async function PublicProfile({
       </section>
       <section className="">
         <ul className="flex flex-col items-center gap-4 ">
-          {links?.map((link: any) => (
+          {userLinks?.map((link: any) => (
             <li key={link.id} className="group min-w-[240px]">
               <a
                 href={link.url}

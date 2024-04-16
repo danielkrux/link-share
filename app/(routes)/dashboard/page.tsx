@@ -1,12 +1,8 @@
 import React from "react";
 
-import { createClient } from "@/app/lib/supabase/createServerClient";
 import LinkForm from "./components/LinkForm";
 
 export default async function DashboardHome() {
-  const supabase = createClient();
-  const { data } = await supabase.from("links").select("*");
-
   return (
     <div className="flex flex-col flex-grow relative bg-white overflow-hidden rounded-lg">
       <section className="p-6 lg:px-10">
@@ -19,7 +15,7 @@ export default async function DashboardHome() {
         </p>
       </section>
 
-      <LinkForm data={data as any[]} />
+      <LinkForm />
     </div>
   );
 }

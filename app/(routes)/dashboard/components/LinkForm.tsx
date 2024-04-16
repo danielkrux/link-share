@@ -3,8 +3,9 @@ import { cookies } from "next/headers";
 
 import Input from "@/app/components/Input";
 import SubmitButton from "@/app/components/SubmitButton";
-import { saveLinks } from "@/app/actions/dashboard.actions";
+import { getLinks, saveLinks } from "@/app/actions/dashboard.actions";
 import { Tables } from "@/app/types/supabase";
+import { createClient } from "@/app/lib/supabase/createServerClient";
 
 import NoLinks from "./NoLinks";
 import PlatformSelect from "./PlatformSelect";
@@ -13,9 +14,17 @@ import DeleteLinkButton from "./DeleteLinkButton";
 
 const isNumber = (id: string | number) => typeof id === "number";
 
-export default function LinkForm() {
+export default async function LinkForm() {
+  const supabase = createClient();
+  const session = await supabase.auth.getSession();
+  const user = session.data.session?.user;
+
   const linksRaw = cookies().get("links")?.value;
-  const links: Tables<"links">[] = JSON.parse(linksRaw ?? "[]");
+  let links: Tables<"links">[] = JSON.parse(linksRaw ?? "[]");
+
+  if (!links.length && user?.id) {
+    links = (await getLinks(user.id)) ?? [];
+  }
 
   return (
     <>
