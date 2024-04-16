@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteLink } from "@/app/actions/dashboard";
+import { deleteLink } from "@/app/actions/dashboard.actions";
 import Button from "@/app/components/Button";
 import { Tables } from "@/app/types/supabase";
 import React from "react";

@@ -6,7 +6,7 @@ import React from "react";
 const platforms = [
   {
     name: "Twitter",
-    value: "twitter",
+    value: "Twitter",
   },
   {
     name: "GitHub",
@@ -14,7 +14,19 @@ const platforms = [
   },
   {
     name: "LinkedIn",
-    value: "linkedin",
+    value: "LinkedIn",
+  },
+  {
+    name: "YouTube",
+    value: "YouTube",
+  },
+  {
+    name: "DEV Community",
+    value: "DevCommunity",
+  },
+  {
+    name: "Other",
+    value: "Other",
   },
 ];
 

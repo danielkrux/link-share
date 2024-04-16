@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { createNewLink } from "@/app/actions/dashboard";
+import { createNewLink } from "@/app/actions/dashboard.actions";
 import Button from "@/app/components/Button";
 
 export default function AddLinkButton() {

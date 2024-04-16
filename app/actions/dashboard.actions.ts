@@ -43,11 +43,12 @@ export async function saveLinks(formData: FormData) {
     url: urls[index],
   }));
 
-  await supabase.from("links").upsert(data, {
+  const { error } = await supabase.from("links").upsert(data, {
     defaultToNull: false,
   });
-  const result = await supabase.from("links").select("*");
+  if (error) console.log("Error saving links", error);
 
+  const result = await supabase.from("links").select("*").eq("user_id", userId);
   cookies().set("links", JSON.stringify(result.data));
 
   return result.data;
@@ -55,6 +56,8 @@ export async function saveLinks(formData: FormData) {
 
 export async function deleteLink(id: number | string) {
   const supabase = createClient();
+  const userObj = await supabase.auth.getSession();
+  const userId = userObj.data.session?.user.id;
 
   if (typeof id === "string") {
     const existingLinksStr = cookies().get("links")?.value;
@@ -63,7 +66,9 @@ export async function deleteLink(id: number | string) {
     cookies().set("links", JSON.stringify(updatedLinks));
   }
 
-  await supabase.from("links").delete().eq("id", id);
-  const result = await supabase.from("links").select("*");
+  const { error } = await supabase.from("links").delete().eq("id", id);
+  if (error) console.log("Error deleting link", error);
+
+  const result = await supabase.from("links").select("*").eq("user_id", userId);
   cookies().set("links", JSON.stringify(result.data));
 }

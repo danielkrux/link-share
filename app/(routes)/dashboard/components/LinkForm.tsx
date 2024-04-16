@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 
 import Input from "@/app/components/Input";
 import SubmitButton from "@/app/components/SubmitButton";
-import { saveLinks } from "@/app/actions/dashboard";
+import { saveLinks } from "@/app/actions/dashboard.actions";
 import { Tables } from "@/app/types/supabase";
 
 import NoLinks from "./NoLinks";
