@@ -44,7 +44,7 @@ export default async function PublicProfile({
                 className="p-4 bg-lightgray rounded-lg flex justify-between max-w-60"
                 target="_blank"
               >
-                <span>{link.name}</span>
+                <span className="truncate mr-2">{link.name}</span>
                 <ArrowRight className="w-5 pr-1 group-hover:translate-x-1 transition-transform" />
               </a>
             </li>

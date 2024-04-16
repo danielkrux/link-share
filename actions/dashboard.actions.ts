@@ -40,7 +40,6 @@ export async function createNewLink() {
     cookies().set("links", JSON.stringify(links));
   } else {
     const currentLinks = await getLinks(userId);
-    console.log(currentLinks);
     cookies().set("links", JSON.stringify([...(currentLinks ?? []), newLink]));
   }
 }
@@ -59,12 +58,18 @@ export async function saveLinks(formData: FormData) {
   const names = formData.getAll("name") as string[];
   const urls = formData.getAll("url") as string[];
 
-  const data = names.map((name, index) => ({
-    name,
-    user_id: userId,
-    id: ids[index] ? parseInt(ids[index] as string) : undefined,
-    url: urls[index],
-  }));
+  const data = names.map((name, index) => {
+    const url = urls[index];
+    const id = ids[index] ? parseInt(ids[index] as string) : undefined;
+    const finalName = name === "Other" ? urls[index] : name;
+
+    return {
+      name: finalName,
+      user_id: userId,
+      id,
+      url,
+    };
+  });
 
   const { error } = await supabase.from("links").upsert(data, {
     defaultToNull: false,
@@ -83,7 +88,7 @@ export async function deleteLink(id: number | string) {
   const userId = userObj.data.session?.user.id;
 
   if (!userId) {
-    console.log("User not found");
+    console.error("User not found");
     return;
   }
 
@@ -95,7 +100,7 @@ export async function deleteLink(id: number | string) {
   }
 
   const { error } = await supabase.from("links").delete().eq("id", id);
-  if (error) console.log("Error deleting link", error);
+  if (error) console.error("Error deleting link", error);
 
   const result = await supabase.from("links").select("*").eq("user_id", userId);
   cookies().set("links", JSON.stringify(result.data));

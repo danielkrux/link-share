@@ -7,7 +7,7 @@ import ChevronDownIcon from "@/public/icons/icon-chevron-down.svg";
 type SelectProps = {
   label: string;
   defaultValue: string;
-  options: { name: string; value: string }[];
+  options: string[];
   name: string;
 };
 
@@ -30,12 +30,12 @@ export default ({ label, defaultValue, name, options }: SelectProps) => {
           >
             <Select.Viewport className="p-1">
               {options.map((option, index) => (
-                <React.Fragment key={`${option.name}-${index}`}>
+                <React.Fragment key={`${option}-${index}`}>
                   <Select.Item
                     className="p-2 hover:bg-lightgray outline-none rounded-lg transition-colors cursor-pointer"
-                    value={option.value}
+                    value={option}
                   >
-                    <Select.ItemText>{option.name}</Select.ItemText>
+                    <Select.ItemText>{option}</Select.ItemText>
                   </Select.Item>
                 </React.Fragment>
               ))}

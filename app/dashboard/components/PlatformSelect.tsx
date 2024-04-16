@@ -4,30 +4,12 @@ import Select from "@/components/ui/Select";
 import React from "react";
 
 const platforms = [
-  {
-    name: "Twitter",
-    value: "Twitter",
-  },
-  {
-    name: "GitHub",
-    value: "GitHub",
-  },
-  {
-    name: "LinkedIn",
-    value: "LinkedIn",
-  },
-  {
-    name: "YouTube",
-    value: "YouTube",
-  },
-  {
-    name: "DEV Community",
-    value: "DevCommunity",
-  },
-  {
-    name: "Other",
-    value: "Other",
-  },
+  "Twitter",
+  "GitHub",
+  "LinkedIn",
+  "YouTube",
+  "DEV Community",
+  "Other",
 ];
 
 export default function PlatformSelect({
@@ -35,12 +17,13 @@ export default function PlatformSelect({
 }: {
   defaultValue: string;
 }) {
+  const exists = platforms.find((platform) => platform === defaultValue);
   return (
     <Select
       label="Platform"
       options={platforms}
       name="name"
-      defaultValue={defaultValue}
+      defaultValue={exists ? defaultValue : "Other"}
     />
   );
 }
