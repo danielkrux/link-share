@@ -4,7 +4,11 @@ import { cookies } from "next/headers";
 import { nanoid } from "nanoid";
 import { createClient } from "../lib/supabase/createServerClient";
 
-export async function getLinks(userId: string) {
+export async function getLinks(userId?: string) {
+  if (!userId) {
+    throw new Error("No user id provided");
+  }
+
   const supabase = createClient();
   const { data, error } = await supabase
     .from("links")
@@ -21,6 +25,8 @@ export async function createNewLink() {
   const userObj = await supabase.auth.getSession();
   const userId = userObj.data.session?.user.id;
 
+  const linksFromCookie = cookies().get("links")?.value;
+
   const newLink = {
     id: nanoid(),
     name: "",
@@ -28,15 +34,15 @@ export async function createNewLink() {
     userId,
   };
 
-  const existingLinks = cookies().get("links")?.value;
-  if (existingLinks) {
-    const links = JSON.parse(existingLinks) ?? [];
+  if (linksFromCookie) {
+    const links = JSON.parse(linksFromCookie) ?? [];
     links.push(newLink);
     cookies().set("links", JSON.stringify(links));
-    return;
+  } else {
+    const currentLinks = await getLinks(userId);
+    console.log(currentLinks);
+    cookies().set("links", JSON.stringify([...(currentLinks ?? []), newLink]));
   }
-
-  cookies().set("links", JSON.stringify([newLink]));
 }
 
 export async function saveLinks(formData: FormData) {
