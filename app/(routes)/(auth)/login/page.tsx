@@ -44,7 +44,7 @@ export default function LoginPage() {
           error={state?.error?.password?.[0]}
         />
         <Button disabled={pending} type="submit">
-          Login
+          {pending ? "Logging in..." : "Login"}
         </Button>
       </form>
       <div className="flex flex-col items-center">

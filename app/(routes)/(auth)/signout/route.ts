@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
     } = await supabase.auth.getSession();
 
     if (session) {
+      cookies().delete("links");
       await supabase.auth.signOut();
     }
   } catch (error) {
