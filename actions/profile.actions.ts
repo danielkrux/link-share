@@ -2,13 +2,15 @@
 
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
+
+import { createClient } from "@/lib/supabase/createServerClient";
 
 import { Database } from "../types/supabase";
 import { getUserServer } from "./auth.actions";
-import { revalidatePath } from "next/cache";
 
 export async function getProfileData(id?: string) {
-  const supabase = createServerActionClient<Database>({ cookies });
+  const supabase = createClient();
   const currentUser = await getUserServer();
 
   const userId = id ?? currentUser?.id;
