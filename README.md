@@ -6,7 +6,7 @@ devlinks is a platform where you can create a page that contains your most impor
 
 ## Demo
 
-You can create an account and share your links at [https://connect-four-danielkrux.vercel.app/](https://connect-four-danielkrux.vercel.app/).
+You can create an account and share your links at [https://link-share-danielkrux.vercel.app/login](https://link-share-danielkrux.vercel.app/login).
 
 ## Tech talk
 
