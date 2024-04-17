@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import React from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import { useFormState, useFormStatus } from "react-dom";
 import { login } from "../actions";
 
 const initialState = {
@@ -32,14 +32,12 @@ export default function LoginPage() {
           label="Email address"
           type="email"
           autoComplete="email"
-          defaultValue="danielmartijn@gmail.com"
           error={state?.error?.email?.[0]}
         />
         <Input
           name="password"
           label="Password"
           type="password"
-          defaultValue="test-123"
           autoComplete="current-password"
           error={state?.error?.password?.[0]}
         />
