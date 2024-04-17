@@ -7,6 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { login } from "../actions";
+import SubmitButton from "@/components/SubmitButton";
 
 const initialState = {
   error: {
@@ -41,9 +42,7 @@ export default function LoginPage() {
           autoComplete="current-password"
           error={state?.error?.password?.[0]}
         />
-        <Button disabled={pending} type="submit">
-          {pending ? "Logging in..." : "Login"}
-        </Button>
+        <SubmitButton label="Login" loadingLabel="Loggin in..." />
       </form>
       <div className="flex flex-col items-center">
         <p className="text-gray text-center">Don&apos;t have an account?</p>

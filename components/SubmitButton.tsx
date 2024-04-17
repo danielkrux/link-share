@@ -6,12 +6,20 @@ import { useFormStatus } from "react-dom";
 import Button from "@/components/ui/Button";
 import { cn } from "../lib/utils";
 
-export default function SubmitButton({ className }: { className?: string }) {
+export default function SubmitButton({
+  label,
+  loadingLabel,
+  className,
+}: {
+  label?: string;
+  loadingLabel?: string;
+  className?: string;
+}) {
   const { pending } = useFormStatus();
 
   return (
     <Button disabled={pending} type="submit" className={cn(className)}>
-      {pending ? "Saving..." : "Save"}
+      {pending ? loadingLabel ?? "Saving..." : label ?? "Save"}
     </Button>
   );
 }
