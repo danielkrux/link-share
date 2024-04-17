@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-import { getUserServer } from "@/actions/auth.actions";
+import { getUser } from "@/actions/auth.actions";
 import Button from "@/components/ui/Button";
 import Nav from "@/components/Nav";
 import PreviewIcon from "@/public/icons/icon-preview-header.svg";
 
 export default async function Navigation() {
-  const user = await getUserServer();
+  const user = await getUser();
 
   return (
     <header className="relative bg-white py-4 px-6 flex justify-between items-center rounded-b-lg md:rounded-lg">

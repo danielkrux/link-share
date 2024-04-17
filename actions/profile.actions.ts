@@ -7,11 +7,11 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/createServerClient";
 
 import { Database } from "../types/supabase";
-import { getUserServer } from "./auth.actions";
+import { getUser } from "./auth.actions";
 
 export async function getProfileData(id?: string) {
   const supabase = createClient();
-  const currentUser = await getUserServer();
+  const currentUser = await getUser();
 
   const userId = id ?? currentUser?.id;
 
@@ -28,7 +28,7 @@ export async function getProfileData(id?: string) {
 
 export async function saveProfileData(formData: FormData) {
   const supabase = createServerActionClient<Database>({ cookies });
-  const user = await getUserServer();
+  const user = await getUser();
 
   if (!user) throw new Error("No user found");
 

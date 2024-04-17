@@ -3,7 +3,13 @@ import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 
 export default async function middleware(req: NextRequest) {
   const res = NextResponse.next();
-  const supabase = createMiddlewareClient({ req, res });
+  const supabase = createMiddlewareClient(
+    { req, res },
+    {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_ANON_KEY,
+    }
+  );
   const user = await supabase.auth.getUser();
   const isAuthenticated = Boolean(user.data.user);
 
